@@ -19,6 +19,16 @@ python main.py
 
 窗口 832×928（逻辑分辨率 416×464 的 2 倍整数放大），最近邻取样保持像素锐利。也可以双击根目录的 `AI坦克大战.lnk` 启动（不显示 Python 控制台）。
 
+## 游戏截图
+
+以下画面来自当前版本的真实游戏运行与渲染。
+
+| 标题界面 | 坦克营地 |
+|---|---|
+| ![标题界面](.screenshots/readme_title.png) | ![坦克营地](.screenshots/readme_garage.png) |
+| **实机对战** | **AI 自博弈** |
+| ![实机对战](.screenshots/readme_battle.png) | ![AI 自博弈](.screenshots/readme_selfplay.png) |
+
 ## 操作
 
 | 按键 | 功能 |
@@ -73,6 +83,10 @@ python play_ai.py
 python plot_curve.py
 ```
 
+![Double DQN 训练曲线](models/train_curve.png)
+
+上图展示每局奖励与 20 局滑动均值，以及贪心评估的胜率与平均击杀。
+
 - **状态向量 384 维**：自身 8 + 基地 1（恒 0）+ 对手 4×7 + 子弹 8×5 + 地图 17×17 + 道具 3×4 + 元信息 6。
 - **10 个离散动作**，每 4 帧决策一次（约 15 次/秒）。
 - **网络结构 384 → 256 → 256 → 10**，Double DQN（online 选动作、target 估值，每 500 次更新硬同步），Huber loss。
@@ -125,6 +139,7 @@ game/
   prefs.py         prefs.json 读写与校验
   playtest.py      试玩会话日志
 ai/dqn.py          QNet / ReplayBuffer / DQNAgent
+.screenshots/       实机运行与 README 展示截图
 docs/              GDD、UI 设计规范、课程四份文档
 models/            模型、训练日志、曲线图、legacy 归档
 assets/            坦克图标与可选贴皮
